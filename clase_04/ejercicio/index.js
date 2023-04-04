@@ -7,7 +7,7 @@ const app = new Vue(
             listaDeNombres: []
         },
         methods: {
-            saludar() {
+            async saludar() {
                 const URL = 'https://rickandmortyapi.com/api/character';
                 const convertirEnJSON = (response) => response.json();
                 const extraerNombres = (data) => data.results.map(personaje => personaje.name);
@@ -28,7 +28,15 @@ const app = new Vue(
                         ]
                 )
 
-                query.then((respuestas) => {
+                const [nombres, generos] = await query;
+                const nombresConGenero = nombres.map((nombre, index) => {
+                    return generos[index] + ' - ' + nombre;
+                });
+                actualizarListaDeNombres(nombresConGenero);
+
+                /*
+                    //Lo que estaba antes
+                    query.then((respuestas) => {
                     const nombres = respuestas[0];
                     const generos = respuestas[1];
                     const nombresConGenero = nombres.map((nombre, index) => {
@@ -36,7 +44,7 @@ const app = new Vue(
                     });
                     actualizarListaDeNombres(nombresConGenero);
 
-                });
+                });*/
 
 
 
