@@ -9,6 +9,9 @@
 <body>
     <div id="app">
         <h1>{{mensaje}}</h1>
+        <ul>
+            <li v-for="item in listaDeNombres">{{item}}</li>
+        </ul>
         <button type="button" class="btn btn-primary" @click="saludar">Ejecutar alerta</button>
     </div>
   <script src="index.js"></script>
