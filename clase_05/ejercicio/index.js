@@ -8,6 +8,25 @@ const esperarDosSegundos = () => new Promise((resolve) => {
     }, 5000);
 });
 
+//const serviceWorkerEnable = navigator.serviceWorker && navigator.serviceWorker.register;
+
+if(navigator.serviceWorker && navigator.serviceWorker.register) {
+    navigator.serviceWorker.register('/sw.js')
+    .then((reg) => {
+            console.log('Service worker registrado');
+            if(reg.installing) {
+                console.log('Service worker instalando');
+            } else if(reg.waiting) {
+                console.log('Service worker instalado');
+            } else if(reg.active) {
+                console.log('Service worker activo');
+            }
+    })
+    .catch((err) => {
+        console.log('Error al registrar el service worker', err);
+    });
+}
+
 const app = new Vue(
     {
         el: '#app',
