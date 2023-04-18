@@ -8,6 +8,12 @@ const esperarDosSegundos = () => new Promise((resolve) => {
     }, 5000);
 });
 
+let eventoIntalar;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    eventoIntalar = e;
+});
+
 //const serviceWorkerEnable = navigator.serviceWorker && navigator.serviceWorker.register;
 
 if(navigator.serviceWorker && navigator.serviceWorker.register) {
@@ -80,6 +86,11 @@ const app = new Vue(
 
 
 
+            },
+            instalarAplicacion() {
+                if(!eventoIntalar) return;
+                eventoIntalar.prompt();
+                console.log("instalando app")
             }
         }
     }

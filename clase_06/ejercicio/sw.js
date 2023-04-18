@@ -19,3 +19,9 @@ self.addEventListener('fetch', function(event) {
         })
     );*/
 });
+
+self.addEventListener('beforeinstallprompt', function(event) {
+    console.log('(SW) - SW capturó un beforeinstallprompt');
+    event.preventDefault();
+    return false;
+});
